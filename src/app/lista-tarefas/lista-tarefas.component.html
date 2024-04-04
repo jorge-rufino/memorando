@@ -69,9 +69,13 @@
         alt="Ilustração de um ambiente com mesa, computador, quadro e um vaso com planta">
   </div>
   <div *ngIf="listaTarefas.length > 0, else semTarefas">
+    <!-- "@highLightedState" é o gatilho para nossa animação, e ele deve receber o "state"
+    como temos mais de um "state", fizemos um "if" ternario para quando passar o mouse no card  -->
     <div
       class="lista-tarefas card-{{ tarefa.categoria }}"
-      *ngFor="let tarefa of listaTarefas">
+      *ngFor="let tarefa of listaTarefas; let i = index"
+      (mouseover) = "indexTarefa = i"
+      [@highLightedState]="indexTarefa === i ? 'highLighted' : 'default'">
       <div class="info-card">
         <p class="categoria-tarefa categoria-{{ tarefa.categoria }}">
           <img
